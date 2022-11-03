@@ -271,13 +271,14 @@ void PandoraMonitoring::DrawPandoraHistogram(const pandora::TwoDHistogram &twoDH
 //------------------------------------------------------------------------------------------------------------------------------------------
 
 void PandoraMonitoring::SetEveDisplayParameters(const bool showDetectors, const DetectorView detectorView, const float transparencyThresholdE,
-    const float energyScaleThresholdE, const float scalingFactor)
+    const float energyScaleThresholdE, const float scalingFactor, const bool useHighVisibility)
 {
     m_showDetectors = showDetectors;
     m_detectorView = detectorView;
     m_transparencyThresholdE = transparencyThresholdE;
     m_energyScaleThresholdE = energyScaleThresholdE;
     m_scalingFactor = scalingFactor;
+    m_useHighVisibility = useHighVisibility;
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------
@@ -1400,7 +1401,10 @@ void PandoraMonitoring::InitializeEve(Char_t transparency)
         }
 
         TGLViewer *pTGLViewer = m_pEveManager->GetDefaultGLViewer();
-        pTGLViewer->ColorSet().Background().SetColor(kWhite);
+        if (m_useHighVisibility)
+            pTGLViewer->ColorSet().Background().SetColor(kBlack);
+        else
+            pTGLViewer->ColorSet().Background().SetColor(kWhite);
 
         if (DETECTOR_VIEW_XZ == m_detectorView)
         {
@@ -1529,7 +1533,10 @@ void PandoraMonitoring::AddScenes(TEveViewer *pTEveViewer, TEveScene *pTEveEvent
     pTEveViewer->AddScene(pTEveGeometryScene);
     pTEveViewer->AddScene(pTEveEventScene);
     pTEveViewer->GetGLViewer()->SetCurrentCamera(camera);
-    pTEveViewer->GetGLViewer()->ColorSet().Background().SetColor(kWhite);
+    if (m_useHighVisibility)
+        pTEveViewer->GetGLViewer()->ColorSet().Background().SetColor(kBlack);
+    else
+        pTEveViewer->GetGLViewer()->ColorSet().Background().SetColor(kWhite);
 
     int currentAxisType(0);
     bool axisDepthTest(false);

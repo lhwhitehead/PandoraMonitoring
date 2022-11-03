@@ -65,10 +65,11 @@ void PandoraMonitoringApi::DrawPandoraHistogram(const pandora::Pandora &pandora,
 //------------------------------------------------------------------------------------------------------------------------------------------
 
 void PandoraMonitoringApi::SetEveDisplayParameters(const pandora::Pandora &pandora, const bool showDetectors,
-    const DetectorView detectorView, const float transparencyThresholdE, const float energyScaleThresholdE, const float scalingFactor)
+    const DetectorView detectorView, const float transparencyThresholdE, const float energyScaleThresholdE, const float scalingFactor,
+    const bool useHighVisibility)
 {
     PandoraMonitoring::GetInstance(pandora)->SetEveDisplayParameters(showDetectors, detectorView, transparencyThresholdE,
-        energyScaleThresholdE, scalingFactor);
+        energyScaleThresholdE, scalingFactor, useHighVisibility);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------

@@ -110,9 +110,10 @@ public:
      *  @param  transparencyThresholdE cell energy for which transparency is saturated (0%, fully opaque)
      *  @param  energyScaleThresholdE cell energy for which color is at top end of continous color palette
      *  @param  scalingFactor TEve works with [cm], Pandora works with [mm] (unless user has decided to use alternative units)
+     *  @param  useHighVisibility use a high visibility mode with dark backgrounds
      */
     void SetEveDisplayParameters(const bool showDetectors, const DetectorView detectorView, const float transparencyThresholdE,
-        const float energyScaleThresholdE, const float scalingFactor);
+        const float energyScaleThresholdE, const float scalingFactor, const bool useHighVisibility);
 
     /**
      *  @brief  Add MC particles to the Eve event-display
@@ -471,6 +472,7 @@ private:
     float                           m_energyScaleThresholdE;    ///< Cell energy for which color is at top end of continous color palette
     bool                            m_showDetectors;            ///< Turns the visibility of the detector geometry on or off
     DetectorView                    m_detectorView;             ///< The detector view
+    bool                            m_useHighVisibility;        ///< Shows bright colours on a dark background
 };
 
 //------------------------------------------------------------------------------------------------------------------------------------------
